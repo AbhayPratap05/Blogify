@@ -1,0 +1,49 @@
+{% extends "layout.html" %} {% block title %} Blogify {% endblock title %}
+{%block content %}
+
+<div class="mt-5 text-center"><h1 class="text-2xl">Blogs</h1></div>
+<div class="grid grid-cols-3 gap-4 mt-10">
+  {% for blog in blogs %}
+  <article
+    class="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg dark:shadow-gray-700/25 dark:bg-gray-900"
+  >
+    {% if blog.photo %}
+    <img alt="" src="{{blog.photo.url}}" class="h-56 w-full object-cover" />
+    {% else %}
+    <div class="min-h-56 border border-white flex justify-center items-center rounded-lg">
+      <h1>No Image Availabe</h1>
+    </div>
+    {% endif %}
+    <div class="p-4">
+      <a href="#">
+        <h3 class="mt-0.5 text-lg text-gray-900 dark:text-white">
+          {{blog.user.username}}
+        </h3>
+      </a>
+      <div class="min-h-30">
+        <p class="mt-2 text-sm/relaxed text-gray-500 dark:text-gray-400 ">
+          {{blog.text}}
+        </p>
+      </div>
+    </div>
+    {% if blog.user == user %}
+    <div class="flex items-center justify-center gap-5 my-2">
+      <a
+        class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+        href="{% url "blog_edit" blog.id %}"
+      >
+        Edit
+      </a>
+
+      <a
+        class="hidden rounded-md bg-red-400 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-red-400 dark:text-white dark:hover:text-white/75"
+        href="{% url "blog_delete" blog.id %}"
+      >
+        Delete
+      </a>
+    </div>{% endif %}
+  </article>
+  {% endfor %}
+</div>
+
+{% endblock content %}

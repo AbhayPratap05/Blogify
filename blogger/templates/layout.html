@@ -1,0 +1,100 @@
+{% load static %}{% load static tailwind_tags%} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% tailwind_css %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <title>{% block title %}Blogify{% endblock title%}</title>
+  </head>
+  <body>
+    <div class="bg-mint-500 mx-20">
+      <header class="w-full">
+        <div
+          class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8"
+        >
+          <a class="block text-teal-600 dark:text-teal-300" href="/">
+            <span class="sr-only">Home</span>
+            <svg
+              width="120"
+              height="120"
+              viewBox="0 0 40 90"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                  fill="currentColor"
+                  d="M 32.515625 41.570312 C 32.214844 41.570312 32.117188 41.976562 32.386719 42.109375 C 33.882812 42.824219 36.054688 44.289062 35.808594 46.660156 C 35.761719 47.109375 36.144531 47.5 36.597656 47.503906 C 38.804688 47.539062 44.054688 48.015625 44.972656 51.769531 C 45.890625 48.015625 51.136719 47.535156 53.34375 47.503906 C 53.796875 47.496094 54.179688 47.109375 54.132812 46.65625 C 53.886719 44.285156 56.058594 42.824219 57.554688 42.105469 C 57.824219 41.976562 57.726562 41.570312 57.425781 41.570312 L 49.878906 41.570312 C 49.507812 41.570312 49.183594 41.820312 49.097656 42.179688 C 48.929688 42.855469 48.574219 43.875 47.945312 44.015625 C 47.042969 44.226562 46.15625 44.554688 46.050781 43.972656 C 46.050781 43.503906 45.945312 42.925781 45.878906 42.597656 C 45.863281 42.523438 45.757812 42.515625 45.734375 42.589844 L 45.449219 43.429688 C 45.449219 43.429688 45.34375 43.269531 44.972656 43.269531 C 44.597656 43.269531 44.492188 43.429688 44.492188 43.429688 L 44.207031 42.589844 C 44.183594 42.515625 44.078125 42.523438 44.0625 42.597656 C 43.996094 42.925781 43.890625 43.503906 43.890625 43.972656 C 43.785156 44.554688 42.898438 44.226562 41.996094 44.015625 C 41.367188 43.875 41.011719 42.859375 40.84375 42.179688 C 40.757812 41.820312 40.433594 41.570312 40.066406 41.570312 Z M 32.515625 41.570312 "
+                />
+              </g>
+            </svg>
+          </a>
+      
+          <div class="flex flex-1 items-center justify-end md:justify-between">
+            <nav aria-label="Global" class="hidden md:block">
+            </nav>
+      
+            <div class="flex items-center gap-4">
+              {% if user.is_authenticated %}
+              <div class="sm:flex sm:gap-4">
+                <a
+                  class="cursor-pointer block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                  href="{% url "blog_create" %}"
+                >
+                  Create Post
+                </a>
+                <form action="{% url "logout" %}" method="post">
+                  {% csrf_token %}
+                  <button
+                  class="cursor-pointer hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                >
+                  Logout
+                </button></form>
+                
+              </div>
+              {% else %}
+              <div class="sm:flex sm:gap-4">
+                <a
+                  class="cursor-pointer block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                  href="{% url "register" %}"
+                >
+                  Register
+                </a>
+                  <a
+                  class="cursor-pointer hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                  href="{% url "login" %}"
+                >
+                  Login
+                </a>
+                
+              </div>
+              {% endif %}
+      
+              <button
+                class="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+              >
+                <span class="sr-only">Toggle menu</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      {% block content %} Welcome to Blogify {% endblock content %}
+    </div>
+  </body>
+</html>

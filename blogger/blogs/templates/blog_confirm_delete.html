@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block title %} Blogify {% endblock title %}
+{%block content %}
+
+<div class="h-[calc(100vh-4rem)] flex flex-col items-center justify-center">
+  <h1 class="text-2xl font-bold">
+    Are you sure you want to <span class="text-red-400">Delete</span> the post?
+  </h1>
+  <form method="post">
+    {% csrf_token %}
+  <button
+    class="mt-5 hidden rounded-md bg-red-400 px-5 py-2.5 text-sm font-medium transition sm:block dark:bg-red-400 dark:text-white dark:hover:bg-red-500"
+    href="/blogs"
+  >
+    Delete
+  </button>
+</form>
+  <a href="{% url "blog_list" %}" class="underline mt-5">Go back</a>
+</div>
+
+
+{% endblock content %}

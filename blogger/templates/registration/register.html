@@ -1,0 +1,37 @@
+{% extends "layout.html" %} {% block content %}
+<h1 class="text-center mt-10 text-4xl">Register</h1>
+<form
+  method="post"
+  class="mt-5 w-auto py-5 flex flex-col justify-center items-center "
+>
+  {% csrf_token %}
+  <div class="mt-2">
+    <h1>UserName:</h1>
+    <div class="border border-white rounded-lg p-1 my-2">{{form.username}}</div>
+  </div>
+  <div class="mt-2">
+    <h1>Email:</h1>
+    <div class="border border-white rounded-lg p-1 my-2">{{form.email}}</div>
+  </div>
+  <div class="mt-2">
+    <h1>Password:</h1>
+    <div class="border border-white rounded-lg p-1 my-2">{{form.password1}}</div>
+  </div>
+  <div class="mt-2">
+    <h1>Confirm Password:</h1>
+    <div class="border border-white rounded-lg p-1 my-2">{{form.password2}}</div>
+  </div>
+  <ul>
+    <li>• Password can’t be too similar to other personal information.</li>
+    <li>• Password must contain at least 8 characters.</li>
+    <li>• Password can’t be a commonly used password.</li>
+    <li>• Password can’t be entirely numeric.</li>
+  </ul>
+  <button
+    class="bg-teal-600 cursor-pointer hover:bg-teal-700 mt-5 py-2 px-4 rounded-lg"
+  >
+    Submit
+  </button>
+</form>
+<p class="mt-2 text-center">Already have an account? <span class="text-teal-600"> <a href="{% url "login" %}">Login</a></span></p>
+{% endblock %}

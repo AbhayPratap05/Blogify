@@ -1,0 +1,23 @@
+{% extends "layout.html" %} {% block content %}
+<h1 class="text-center mt-10 text-4xl">Login</h1>
+<form
+  method="post"
+  class="flex flex-col justify-center items-center mt-5 w-auto py-5"
+>
+  {% csrf_token %}
+  <div class="mt-2">
+    <h1>UserName:</h1>
+    <div class="border border-white rounded-lg p-1 my-2">{{form.username}}</div>
+  </div>
+  <div class="mt-2">
+    <h1>Password:</h1>
+    <div class="border border-white rounded-lg p-1 my-2">{{form.password}}</div>
+  </div>
+  <button
+    class="bg-teal-600 cursor-pointer hover:bg-teal-700 mt-5 py-2 px-4 rounded-lg"
+  >
+    Submit
+  </button>
+</form>
+<p class="mt-2 text-center">Dont have an account? <span class="text-teal-600"> <a href="{% url "register" %}">Register</a></span></p>
+{% endblock %}
